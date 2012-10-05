@@ -1,0 +1,100 @@
+{# Template for CKEditor widget #}
+
+{% block ng_form_ckeditor_widget %}
+{% spaceless %}
+  <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+  
+  <script type="text/javascript">
+    {% autoescape true js %}
+    var CKEDITOR_BASEPATH = '{{ app.request.basePath ~ '/bundles/ngform/ckeditor/'}}';
+    {% endautoescape %}
+  </script>
+  
+  <script type="text/javascript" src="{{ asset('bundles/ngform/ckeditor/ckeditor.js') }}"></script>
+  
+  <script type="text/javascript">
+  {% autoescape false %}
+    {% set plugins = '' %}
+    {# Add plugins #}
+    {% for name, external_plugin in external_plugins %}
+      CKEDITOR.plugins.addExtrenal('{{ name }}', '{{ app.requestBasePath ~ external_plugin.path }}', '{{ extrenal_plugin.file }}')
+      {% if not loop.first %}
+        {% set plugins = plugins ~ ',' %}
+      {% endif %}
+    {% endfor %}
+    
+    CKEDITOR.replace("{{ id }}", {
+      {% if width is not null %}
+        width: '{{ width }}',
+      {% endif %}
+      
+      {% if height is not null %}
+        height: '{{ height }}',
+      {% endif %}
+      
+      {% if language is not null %}
+        language: '{{ language }}',
+      {% endif %}
+      
+      {% if ui_color in not null %}
+        uiColor: '{{ ui_color }}',
+      {% endif %}
+      
+      {% if startup_outline_blocks == true %}
+        startupOutlineBlocks: true,
+      {% endif %}
+      
+      {% if filebrowser_browse_url is not null %}
+        filebrowserBrowseUrl: '{{ filebrowser_browse_url }}',
+      {% endif %}
+      
+      {% if filebrowser_upload_url is not null %}
+        filebrowserUploadUrl: '{{ filebrowser_upload_url }}',
+      {% endif %}
+      
+      {% if filebrowser_image_browse_url  is not null %}
+        filebrowserImageBrowseUrl: '{{ filebrowser_image_browse_url }}',
+      {% endif %}
+      
+      {% if filebrowser_image_upload_url is not null %}
+        filebrowserImageUploadUrl: '{{ filebrowser_image_upload_url }}',
+      {% endif %}
+      
+      {% if filebrowser_flash_browse_url is not null %}
+        filebrowserFlashBrowseUrl: '{{ filebrowser_flash_browse_url }}',
+      {% endif %}
+      
+      {% if filebrowser_flash_upload_url is not null %}
+        filebrowserFlashUploadUrl: '{{ filebrowser_flash_upload_url }}',
+      {% endif %}
+      
+      {% if skin is not null %}
+        skin: '{{ skin }}',
+      {% endif %}
+      
+      {% if format_tags is not null %}
+        formatTags: '{{ format_tags | join(';') | raw }}',
+      {% endif %}
+      
+      {% if base_href is not null %}
+        baseHref: '{{ base_href }}',
+      {% endif %}
+      
+      {% if body_class is not null %}
+        bodyClass: '{{ body_class }}',
+      {% endif %}
+      
+      {% if content_css is not null %}
+        contentCss: '{{ asset(content_css) }}',
+      {% endif %}
+      
+      {% if plugins %}
+        extraPlugins: '{{ plugins }}',
+      {% endif %}
+      
+      toolbar: {{ toolbar | json_encode | raw }}
+    });
+  {% endautoescape %}
+  </script>
+{% endspaceless%}
+{% endblock %}

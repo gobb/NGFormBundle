@@ -1,0 +1,7 @@
+{# Template for YandexMap widget #}
+{% block ng_form_yandex_map_widget %}
+{% spaceless %}
+  {{ block("field_widget") }}
+  <div id="{{ id }}-yandex-map"></div>
+{% endspaceless %}
+{% endblock %}

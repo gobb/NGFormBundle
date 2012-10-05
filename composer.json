@@ -1,0 +1,22 @@
+{
+  "name": "ng/form-bundle",
+  "description": "Add function to form in symfony 2",
+  "keywords": ["form", "ckeditor", "multiple field", "images"],
+  "homepage": "http://github.com/ZhukV/NGFormBundle",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vitaliy Zhukv",
+      "email": "zhuk2205@gmail.com"
+    }
+  ],
+  
+  "require": {
+    "php": ">=5.3.4"
+  },
+  
+  "autoload": {
+    "psr-0": { "LinkFinder": "src/" }
+  }
+}

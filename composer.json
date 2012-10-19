@@ -17,6 +17,6 @@
   },
   
   "autoload": {
-    "psr-0": { "NGFormBundle": "src/" }
+    "psr-0": { "NG\\FormBundle": "src/" }
   }
 }
